@@ -21,7 +21,7 @@ class Alumno(models.Model):
 	class Meta:	
 		ordering = ("apellido", "nombre")
 
-	def __unicode__(self):
+	def __str__(self):
 		return u"%s %s" % (self.apellido.upper(), self.nombre.upper())
 
 	@property
@@ -43,7 +43,7 @@ class Nivel(models.Model):
 	class Meta:
 		verbose_name_plural = "niveles"
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.nombre.upper()
 
 
@@ -66,7 +66,7 @@ class Matricula(models.Model):
 
 		ordering = ("alumno",)
 
-	def __unicode__(self):
+	def __str__(self):
 		return u"Matricula %s %s" % (self.alumno, self.ano_lectivo)
 
 
@@ -83,7 +83,7 @@ class Perfil_Profesor(models.Model):
 		verbose_name = "perfil de profesor"
 		verbose_name_plural = "perfiles de profesores"
 
-	def __unicode__(self):
+	def __str__(self):
 		return "%s %s" % (self.usuario.last_name.upper(), self.usuario.first_name.upper())
 
 	@property
@@ -104,7 +104,7 @@ class Clase(models.Model):
 	descripcion = models.CharField(max_length=1000, blank=True, null=True)
 	status = models.CharField(max_length=150, choices=(("A", "Activo"), ("I", "Inactivo")))
 
-	def __unicode__(self):
+	def __str__(self):
 		return u"%s %s" % (self.nombre.upper(), self.nivel.nombre.upper())
 
 	class Meta:
@@ -115,7 +115,7 @@ class Clase_Profesor(models.Model):
 	profesor = models.ForeignKey(Perfil_Profesor, null=True, blank=True)
 	clase = models.ForeignKey(Clase, null=True, blank=True)
 
-	def __unicode__(self):
+	def __str__(self):
 		return u"%s - %s" % (self.profesor, self.clase)
 
 	class Meta:
@@ -132,7 +132,7 @@ class Nota(models.Model):
 	tipo = models.CharField(max_length=150)
 	publicada = models.BooleanField(default=False)
 
-	def __unicode__(self):
+	def __str__(self):
 		return u"%s - %s" % (self.alumno, self.periodo)
 
 
@@ -166,5 +166,5 @@ class Periodo(models.Model):
 
 		return _nombre_quimestre
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.nombre_periodo
